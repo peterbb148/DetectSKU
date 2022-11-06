@@ -4,7 +4,8 @@ we have images of cats and dogs in a separate folder and a csv
 file containing the name to the jpg file as well as the target
 label (0 for cat, 1 for dog).
 Programmed by Aladdin Persson <aladdin.persson at hotmail dot com>
-*    2020-04-03 Initial coding
+* 2020-04-03 Initial coding
+* 2022-11-06 Adapted to use foldernames to indicate type rather than using a CSV file
 """
 
 # Imports
