@@ -8,6 +8,8 @@ Programmed by Aladdin Persson <aladdin.persson at hotmail dot com>
 * 2022-11-06 Adapted to use foldernames to indicate type rather than using a CSV file
 """
 
+#%%
+
 # Imports
 import torch
 import torch.nn as nn  # All neural network modules, nn.Linear, nn.Conv2d, BatchNorm, Loss functions
@@ -22,7 +24,7 @@ from torch.utils.data import (
     DataLoader,
 )  # Gives easier dataset managment and creates mini batches
 
-
+#%%
 class CatsAndDogsDataset(Dataset):
     def __init__(self, csv_file, root_dir, transform=None):
         self.annotations = pd.read_csv(csv_file)
@@ -53,6 +55,7 @@ learning_rate = 1e-3
 batch_size = 32
 num_epochs = 10
 
+#%%
 # Load Data
 dataset = CatsAndDogsDataset(
     csv_file="cats_dogs.csv",
@@ -74,6 +77,7 @@ model.to(device)
 # Loss and optimizer
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=learning_rate)
+#%%
 
 # Train Network
 for epoch in range(num_epochs):
@@ -99,6 +103,7 @@ for epoch in range(num_epochs):
 
     print(f"Cost at epoch {epoch} is {sum(losses)/len(losses)}")
 
+#%%
 # Check accuracy on training to see how good our model is
 def check_accuracy(loader, model):
     num_correct = 0
@@ -121,6 +126,7 @@ def check_accuracy(loader, model):
 
     model.train()
 
+#%%
 
 print("Checking accuracy on Training Set")
 check_accuracy(train_loader, model)
