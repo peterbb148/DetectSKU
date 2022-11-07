@@ -32,7 +32,7 @@ class CatsAndDogsDataset(Dataset):
         self.transform = transform
 
     def __len__(self):
-        return len(self.annotations)
+        return len(self.annotations)-1
 
     def __getitem__(self, index):
         img_path = os.path.join(self.root_dir, self.annotations.iloc[index, 0])
@@ -58,15 +58,16 @@ num_epochs = 10
 #%%
 # Load Data
 dataset = CatsAndDogsDataset(
-    csv_file="cats_dogs.csv",
-    root_dir="cats_dogs_resized",
+    csv_file="Dataset.csv",
+    root_dir="Datasets/Coke",
     transform=transforms.ToTensor(),
 )
 
 # Dataset is actually a lot larger ~25k images, just took out 10 pictures
 # to upload to Github. It's enough to understand the structure and scale
 # if you got more images.
-train_set, test_set = torch.utils.data.random_split(dataset, [5, 5])
+print(dataset.__len__())
+train_set, test_set = torch.utils.data.random_split(dataset, [dataset.__len__()-15, 15])
 train_loader = DataLoader(dataset=train_set, batch_size=batch_size, shuffle=True)
 test_loader = DataLoader(dataset=test_set, batch_size=batch_size, shuffle=True)
 
@@ -133,3 +134,4 @@ check_accuracy(train_loader, model)
 
 print("Checking accuracy on Test Set")
 check_accuracy(test_loader, model)
+# %%
